@@ -1,9 +1,18 @@
 version: '3'
 
 services:
-        apache:
-                image: httpd:2.4
+        nginx:
+                image: nginx:1.13
                 ports:
                         - 80:80
                 volumes:
-                        - ./src:/usr/local/apache2/htdocs
+                        - .src:/usr/share/nginx/html
+                        - .src:/usr/share/nginx/html
+                depends_on:
+                        - php
+
+                php:
+                        image: php:7.2-fpm
+                        volumes:
+                                - ./src:/usr/share/nginx/html
+                          
